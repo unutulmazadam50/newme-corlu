@@ -1,0 +1,55 @@
+---
+import { createWhatsAppUrl } from '../data/business';
+
+interface Props {
+  message?: string;
+  variant?: 'primary' | 'secondary' | 'outline' | 'white' | 'accent' | 'floating';
+  size?: 'sm' | 'md' | 'lg';
+  fullWidth?: boolean;
+  class?: string;
+  label?: string;
+  showIcon?: boolean;
+}
+
+const {
+  message,
+  variant = 'primary',
+  size = 'md',
+  fullWidth = false,
+  class: extraClass = '',
+  label = "WhatsApp'tan Sipariş Ver",
+  showIcon = true,
+} = Astro.props;
+
+const url = createWhatsAppUrl(message);
+
+const sizeClasses = {
+  sm: 'px-3.5 py-2 text-xs font-semibold gap-1.5 min-h-[38px]',
+  md: 'px-5 py-2.5 text-sm font-semibold gap-2 min-h-[44px]',
+  lg: 'px-7 py-3.5 text-base font-bold gap-2.5 min-h-[52px]',
+}[size];
+
+const variantClasses = {
+  primary: 'bg-[#2E6B48] text-white hover:bg-[#1E4B32] shadow-sm hover:shadow-md transition-all duration-200 active:scale-[0.98]',
+  secondary: 'bg-[#E7F0E9] text-[#1E4B32] hover:bg-[#D5E5D9] transition-all duration-200 active:scale-[0.98]',
+  outline: 'border-2 border-[#2E6B48] text-[#2E6B48] hover:bg-[#2E6B48] hover:text-white transition-all duration-200 active:scale-[0.98]',
+  white: 'bg-white text-[#172019] hover:bg-[#F8F7F3] shadow-md hover:shadow-lg transition-all duration-200 active:scale-[0.98]',
+  accent: 'bg-[#D5A44C] text-[#172019] hover:bg-[#C2913A] shadow-sm hover:shadow-md transition-all duration-200 active:scale-[0.98]',
+  floating: 'bg-[#25D366] text-white hover:bg-[#20BA5A] shadow-whatsapp hover:scale-105 transition-all duration-200 active:scale-95',
+}[variant];
+---
+
+<a
+  href={url}
+  target="_blank"
+  rel="noopener noreferrer"
+  class={`inline-flex items-center justify-center rounded-full text-center transition-all duration-200 select-none ${sizeClasses} ${variantClasses} ${fullWidth ? 'w-full' : ''} ${extraClass}`}
+  aria-label={label}
+>
+  {showIcon && (
+    <svg class={size === 'lg' ? 'w-5 h-5 flex-shrink-0' : 'w-4 h-4 flex-shrink-0'} viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.528 1.838.78 2.791.78h.001c3.182 0 5.769-2.587 5.769-5.768.001-3.18-2.585-5.764-5.77-5.764zm3.376 8.169c-.14.394-.712.728-1.02.775-.28.043-.643.08-1.849-.419-1.542-.638-2.536-2.196-2.613-2.298-.076-.102-.622-.828-.622-1.579 0-.751.394-1.121.534-1.274.14-.153.305-.192.407-.192.102 0 .204.002.293.006.094.004.22-.036.344.263.127.305.432 1.053.47 1.13.038.076.064.165.013.267-.051.102-.076.165-.153.254-.076.089-.161.199-.23.267-.076.076-.156.159-.067.311.089.153.395.652.848 1.056.583.52 1.074.681 1.227.757.153.076.242.064.331-.038.089-.102.382-.444.483-.597.102-.153.204-.127.343-.076.14.051.89.419 1.043.496.153.076.254.115.292.178.038.064.038.369-.102.763zM12 2C6.477 2 2 6.477 2 12c0 1.891.527 3.659 1.442 5.168l-1.442 5.264 5.424-1.423A9.957 9.957 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" />
+    </svg>
+  )}
+  <span>{label}</span>
+</a>

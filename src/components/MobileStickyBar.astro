@@ -1,0 +1,29 @@
+---
+import { business, createWhatsAppUrl } from '../data/business';
+
+const whatsappUrl = createWhatsAppUrl();
+---
+
+<div class="sm:hidden fixed bottom-0 left-0 right-0 z-40 bg-white/95 backdrop-blur-md border-t border-[#E4E6E2] p-3 shadow-lg flex items-center gap-2">
+  <a
+    href="/menu"
+    class="flex-1 inline-flex items-center justify-center gap-1.5 py-3 px-4 rounded-full bg-[#E7F0E9] text-[#1E4B32] text-sm font-bold active:scale-[0.98] transition-all min-h-[44px]"
+  >
+    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M4 6h16M4 12h16M4 18h16" />
+    </svg>
+    <span>Dijital Menü</span>
+  </a>
+
+  <a
+    href={whatsappUrl}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="flex-1 inline-flex items-center justify-center gap-1.5 py-3 px-4 rounded-full bg-[#25D366] text-white text-sm font-bold shadow-sm active:scale-[0.98] transition-all min-h-[44px]"
+  >
+    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.528 1.838.78 2.791.78h.001c3.182 0 5.769-2.587 5.769-5.768.001-3.18-2.585-5.764-5.77-5.764zm3.376 8.169c-.14.394-.712.728-1.02.775-.28.043-.643.08-1.849-.419-1.542-.638-2.536-2.196-2.613-2.298-.076-.102-.622-.828-.622-1.579 0-.751.394-1.121.534-1.274.14-.153.305-.192.407-.192.102 0 .204.002.293.006.094.004.22-.036.344.263.127.305.432 1.053.47 1.13.038.076.064.165.013.267-.051.102-.076.165-.153.254-.076.089-.161.199-.23.267-.076.076-.156.159-.067.311.089.153.395.652.848 1.056.583.52 1.074.681 1.227.757.153.076.242.064.331-.038.089-.102.382-.444.483-.597.102-.153.204-.127.343-.076.14.051.89.419 1.043.496.153.076.254.115.292.178.038.064.038.369-.102.763zM12 2C6.477 2 2 6.477 2 12c0 1.891.527 3.659 1.442 5.168l-1.442 5.264 5.424-1.423A9.957 9.957 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" />
+    </svg>
+    <span>WhatsApp</span>
+  </a>
+</div>

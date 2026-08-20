@@ -1,0 +1,112 @@
+---
+import WhatsAppButton from './WhatsAppButton.astro';
+---
+
+<section class="py-16 md:py-24 bg-white border-y border-[#E4E6E2]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+      
+      <!-- Left Visual -->
+      <div class="lg:col-span-6 relative">
+        <div class="relative rounded-3xl overflow-hidden aspect-[4/3] sm:aspect-[16/11] shadow-2xl border-4 border-[#F8F7F3]">
+          <img
+            src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?auto=format&fit=crop&w=1000&q=80"
+            alt="New Me Renkli ve Dengeli Bowl Çeşitleri"
+            loading="lazy"
+            class="w-full h-full object-cover hover:scale-105 transition-transform duration-700"
+          />
+          <div class="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent"></div>
+          
+          <div class="absolute bottom-6 left-6 right-6 text-white">
+            <span class="inline-block px-3 py-1 rounded-full text-xs font-bold bg-[#2E6B48] text-white mb-2">
+              İmza Kategori
+            </span>
+            <h4 class="text-xl sm:text-2xl font-bold">Her Lokmada Zengin Besin Değeri</h4>
+          </div>
+        </div>
+
+        <!-- Floating Accent Badge -->
+        <div class="hidden sm:flex absolute -bottom-6 -right-6 bg-[#172019] text-white p-5 rounded-3xl shadow-xl max-w-xs flex-col gap-1">
+          <span class="text-xs font-bold text-[#D5A44C]">🥗 Bowl Sanatı</span>
+          <p class="text-xs text-gray-300 leading-relaxed">
+            Kompleks karbonhidrat, kaliteli protein ve taze yeşilliklerin ideal dengesi.
+          </p>
+        </div>
+      </div>
+
+      <!-- Right Content -->
+      <div class="lg:col-span-6 flex flex-col gap-6">
+        <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#E7F0E9] text-[#1E4B32] text-xs font-bold uppercase tracking-wider w-fit">
+          New Me İmza Koleksiyonu
+        </span>
+
+        <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-[#172019] tracking-tight leading-tight">
+          Renkli. Dengeli. <br />
+          <span class="text-[#2E6B48]">Doyurucu.</span>
+        </h2>
+
+        <p class="text-base text-[#697069] leading-relaxed">
+          Kinoa, esmer pirinç veya karabuğday tabanında; fırınlanmış taze sebzeler, avokado, tohumlar ve özel ızgara proteinlerle hazırlanan kaselerimiz gün boyu enerjini yüksek tutar.
+        </p>
+
+        <!-- 3 Feature Bullets -->
+        <div class="flex flex-col gap-4 pt-2">
+          
+          <div class="flex items-start gap-4 p-4 rounded-2xl bg-[#F8F7F3] border border-[#E4E6E2]">
+            <div class="w-10 h-10 rounded-xl bg-white text-[#2E6B48] flex items-center justify-center font-bold text-lg shadow-sm flex-shrink-0">
+              🌱
+            </div>
+            <div>
+              <h4 class="text-sm font-bold text-[#172019]">Taze İçerikler</h4>
+              <p class="text-xs text-[#697069] mt-0.5">Her sabah tedarik edilen taze yeşillikler ve katkısız ev yapımı soslar.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-4 rounded-2xl bg-[#F8F7F3] border border-[#E4E6E2]">
+            <div class="w-10 h-10 rounded-xl bg-white text-[#2E6B48] flex items-center justify-center font-bold text-lg shadow-sm flex-shrink-0">
+              ⚖️
+            </div>
+            <div>
+              <h4 class="text-sm font-bold text-[#172019]">Dengeli Kombinasyonlar</h4>
+              <p class="text-xs text-[#697069] mt-0.5">Glisemik indeksi düşük kompleks lifler ve sağlıklı doymamış yağ asitleri.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-4 p-4 rounded-2xl bg-[#F8F7F3] border border-[#E4E6E2]">
+            <div class="w-10 h-10 rounded-xl bg-white text-[#2E6B48] flex items-center justify-center font-bold text-lg shadow-sm flex-shrink-0">
+              🥩
+            </div>
+            <div>
+              <h4 class="text-sm font-bold text-[#172019]">Protein Seçenekleri</h4>
+              <p class="text-xs text-[#697069] mt-0.5">Norveç somonu, yağsız tavuk göğsü, dana bonfile veya marine organik tofu seçenekleri.</p>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Action CTAs -->
+        <div class="flex flex-col sm:flex-row items-center gap-3.5 pt-4">
+          <a
+            href="/menu?category=bowl"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-[#2E6B48] text-white text-sm font-bold hover:bg-[#1E4B32] transition-colors"
+          >
+            <span>Bowl'ları Keşfet</span>
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+
+          <WhatsAppButton
+            message="Merhaba, New Me Bowl çeşitleri ve sipariş hakkında bilgi almak istiyorum."
+            variant="secondary"
+            size="md"
+            label="WhatsApp'tan Bilgi Al"
+            class="w-full sm:w-auto"
+          />
+        </div>
+
+      </div>
+
+    </div>
+  </div>
+</section>

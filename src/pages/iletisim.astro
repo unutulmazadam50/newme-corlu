@@ -1,0 +1,183 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import { business, createWhatsAppUrl } from '../data/business';
+
+const quickInquiries = [
+  {
+    title: 'Sipariş Vermek İstiyorum',
+    desc: 'Menüdeki lezzetlerden paket veya adrese teslim sipariş vermek için.',
+    msg: 'Merhaba, New Me menüsünden sipariş vermek istiyorum.',
+    icon: '🛍️',
+  },
+  {
+    title: 'Özel Beslenme & Makrolar',
+    desc: 'Kişisel hedeflerinize veya alerjen durumunuza uygun öğün danışmanlığı.',
+    msg: 'Merhaba, özel beslenme / makro hedeflerim için menü seçenekleriniz hakkında bilgi almak istiyorum.',
+    icon: '🎯',
+  },
+  {
+    title: 'Ofis & Kurumsal Paketler',
+    desc: 'Ofis veya grup için sağlıklı öğün ve toplantı ikramları.',
+    msg: 'Merhaba, ofis / grup sağlıklı yemek paketleriniz hakkında bilgi alabilir miyim?',
+    icon: '🏢',
+  },
+];
+---
+
+<Layout
+  title="İletişim & Lokasyon | New Me Wellness Cafe Çorlu"
+  description="New Me Çorlu adres bilgileri, çalışma saatleri, telefon ve WhatsApp iletişim kanalları. Bize anında ulaşın."
+  activePath="/iletisim"
+>
+  <!-- Header -->
+  <section class="bg-white border-b border-[#E4E6E2] py-14 md:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-2xl mx-auto">
+      <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#E7F0E9] text-[#1E4B32] text-xs font-bold uppercase tracking-wider mb-3">
+        Bize Kolayca Ulaşın
+      </span>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-[#172019] tracking-tight">
+        New Me İletişim
+      </h1>
+      <p class="text-base sm:text-lg text-[#697069] mt-3">
+        Tüm soru, öneri ve siparişleriniz için WhatsApp hattımız veya telefon üzerinden bizimle iletişime geçebilirsiniz.
+      </p>
+    </div>
+  </section>
+
+  <!-- Content Section -->
+  <section class="py-16 md:py-24 bg-[#F8F7F3]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Primary 2-Column Grid -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-12 items-start mb-16">
+        
+        <!-- Left: Quick WhatsApp Actions (7/12) -->
+        <div class="lg:col-span-7 flex flex-col gap-6">
+          <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#E4E6E2] shadow-sm">
+            <h2 class="text-xl sm:text-2xl font-black text-[#172019] mb-2">
+              WhatsApp Hızlı Başlatıcı
+            </h2>
+            <p class="text-xs sm:text-sm text-[#697069] mb-6">
+              Aşağıdaki konulardan birini seçerek tek tıkla doğrudan ilgili mesajla WhatsApp sohbetini başlatabilirsiniz:
+            </p>
+
+            <div class="flex flex-col gap-3.5">
+              {quickInquiries.map((inq) => (
+                <a
+                  href={createWhatsAppUrl(inq.msg)}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="group p-4 sm:p-5 rounded-2xl bg-[#F8F7F3] border border-[#E4E6E2] hover:border-[#2E6B48] hover:bg-[#E7F0E9]/30 transition-all flex items-center justify-between gap-4"
+                >
+                  <div class="flex items-center gap-3.5">
+                    <span class="text-2xl flex-shrink-0">{inq.icon}</span>
+                    <div>
+                      <h4 class="text-sm font-bold text-[#172019] group-hover:text-[#2E6B48] transition-colors">
+                        {inq.title}
+                      </h4>
+                      <p class="text-xs text-[#697069] mt-0.5">{inq.desc}</p>
+                    </div>
+                  </div>
+                  <span class="w-9 h-9 rounded-full bg-[#25D366] text-white flex items-center justify-center flex-shrink-0 shadow-sm group-hover:scale-110 transition-transform">
+                    <svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
+                      <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.528 1.838.78 2.791.78h.001c3.182 0 5.769-2.587 5.769-5.768.001-3.18-2.585-5.764-5.77-5.764zm3.376 8.169c-.14.394-.712.728-1.02.775-.28.043-.643.08-1.849-.419-1.542-.638-2.536-2.196-2.613-2.298-.076-.102-.622-.828-.622-1.579 0-.751.394-1.121.534-1.274.14-.153.305-.192.407-.192.102 0 .204.002.293.006.094.004.22-.036.344.263.127.305.432 1.053.47 1.13.038.076.064.165.013.267-.051.102-.076.165-.153.254-.076.089-.161.199-.23.267-.076.076-.156.159-.067.311.089.153.395.652.848 1.056.583.52 1.074.681 1.227.757.153.076.242.064.331-.038.089-.102.382-.444.483-.597.102-.153.204-.127.343-.076.14.051.89.419 1.043.496.153.076.254.115.292.178.038.064.038.369-.102.763zM12 2C6.477 2 2 6.477 2 12c0 1.891.527 3.659 1.442 5.168l-1.442 5.264 5.424-1.423A9.957 9.957 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" />
+                    </svg>
+                  </span>
+                </a>
+              ))}
+            </div>
+
+            <!-- Free text WhatsApp inquiry input -->
+            <div class="mt-6 pt-6 border-t border-[#F1F0EC]">
+              <label class="block text-xs font-bold text-[#172019] mb-2 uppercase">Veya Özel Mesajını Yaz:</label>
+              <form id="custom-wa-form" class="flex flex-col sm:flex-row gap-2">
+                <input
+                  type="text"
+                  id="custom-wa-text"
+                  placeholder="Mesajınızı buraya yazın..."
+                  class="flex-1 px-4 py-3 rounded-2xl bg-[#F8F7F3] border border-[#E4E6E2] text-sm focus:outline-none focus:border-[#2E6B48]"
+                />
+                <button
+                  type="submit"
+                  class="px-6 py-3 rounded-2xl bg-[#2E6B48] text-white text-sm font-bold hover:bg-[#1E4B32] transition-colors"
+                >
+                  WhatsApp'a Gönder
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Business Info & Hours (5/12) -->
+        <div class="lg:col-span-5 flex flex-col gap-6">
+          
+          <!-- Location Details Card -->
+          <div class="bg-white rounded-3xl p-6 sm:p-8 border border-[#E4E6E2] shadow-sm flex flex-col gap-5">
+            <h3 class="text-xl font-bold text-[#172019] pb-3 border-b border-[#F1F0EC]">
+              İşletme Bilgileri
+            </h3>
+
+            <div class="flex items-start gap-3.5">
+              <span class="text-xl text-[#2E6B48]">📍</span>
+              <div>
+                <span class="text-xs font-bold text-[#697069] uppercase block">Adres</span>
+                <p class="text-sm font-semibold text-[#172019] mt-0.5 leading-relaxed">{business.address}</p>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5">
+              <span class="text-xl text-[#2E6B48]">⏰</span>
+              <div>
+                <span class="text-xs font-bold text-[#697069] uppercase block">Çalışma Saatleri</span>
+                <ul class="text-xs sm:text-sm text-[#172019] mt-0.5 space-y-1 font-medium">
+                  {business.workingHours.map(w => (
+                    <li><span class="text-[#697069]">{w.days}:</span> {w.hours}</li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+
+            <div class="flex items-start gap-3.5">
+              <span class="text-xl text-[#2E6B48]">📞</span>
+              <div>
+                <span class="text-xs font-bold text-[#697069] uppercase block">Telefon & WhatsApp</span>
+                <p class="text-sm font-bold text-[#1E4B32] mt-0.5">{business.phone}</p>
+              </div>
+            </div>
+
+            <div class="pt-2 flex flex-col gap-2">
+              <a
+                href={business.mapsUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="w-full inline-flex items-center justify-center gap-2 py-3 px-4 rounded-2xl bg-[#F8F7F3] border border-[#E4E6E2] text-xs font-bold text-[#172019] hover:bg-[#E7F0E9] hover:text-[#1E4B32] transition-colors"
+              >
+                <span>Google Haritada Yol Tarifi Al</span>
+                <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M7 17l9.2-9.2M17 17V7.8H7.8"/>
+                </svg>
+              </a>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+</Layout>
+
+<script>
+  const form = document.getElementById('custom-wa-form');
+  const input = document.getElementById('custom-wa-text') as HTMLInputElement | null;
+
+  form?.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const text = input?.value.trim() || 'Merhaba, New Me menü ve sipariş hakkında bilgi almak istiyorum.';
+    const targetUrl = `https://wa.me/905300000000?text=${encodeURIComponent(text)}`;
+    window.open(targetUrl, '_blank');
+  });
+</script>

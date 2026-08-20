@@ -1,0 +1,343 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { menuItems } from '../../data/menu';
+import { categories } from '../../data/categories';
+import { goals } from '../../data/goals';
+import MenuCard from '../../components/MenuCard.astro';
+import WhatsAppButton from '../../components/WhatsAppButton.astro';
+---
+
+<Layout
+  title="Dijital Menü & Besin Değerleri | New Me Çorlu"
+  description="New Me Çorlu'nun kalorisi ve makroları belli zengin fit menülerini, bowl çeşitlerini, protein tabaklarını ve içeceklerini keşfedin."
+  activePath="/menu"
+>
+  <!-- Page Header -->
+  <section class="bg-white border-b border-[#E4E6E2] py-12 md:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#E7F0E9] text-[#1E4B32] text-xs font-bold uppercase tracking-wider mb-3">
+        %100 Şeffaf Besin Değerleri
+      </span>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-[#172019] tracking-tight">
+        New Me Dijital Menü
+      </h1>
+      <p class="text-base sm:text-lg text-[#697069] mt-3 max-w-2xl mx-auto">
+        Kalori, protein, karbonhidrat ve yağ dengesi hesaplanmış taze ve sağlıklı lezzetlerimizi inceleyin, tek tıkla WhatsApp üzerinden sipariş verin.
+      </p>
+
+      <!-- Goal shortcut pills -->
+      <div class="flex flex-wrap items-center justify-center gap-2 pt-6">
+        <span class="text-xs font-semibold text-[#697069] mr-1">Hedefine göre filtrele:</span>
+        {goals.map((g) => (
+          <button
+            type="button"
+            data-goal-btn={g.filterKey}
+            class="goal-pill px-3.5 py-1.5 rounded-full text-xs font-bold border border-[#E4E6E2] bg-[#F8F7F3] text-[#172019] hover:bg-[#2E6B48] hover:text-white hover:border-[#2E6B48] transition-all"
+          >
+            🎯 {g.title}
+          </button>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Filter & Menu Container -->
+  <section class="py-10 md:py-16 bg-[#F8F7F3] min-h-[600px]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Controls Bar: Search & Category Tabs -->
+      <div class="bg-white rounded-3xl p-4 sm:p-6 border border-[#E4E6E2] shadow-sm mb-10">
+        
+        <!-- Search Input -->
+        <div class="relative mb-6 max-w-md mx-auto sm:mx-0">
+          <input
+            type="text"
+            id="menu-search-input"
+            placeholder="Ürün adı, içerik veya etiket ara (örn: somon, kinoa, protein)..."
+            class="w-full pl-11 pr-4 py-3 rounded-2xl bg-[#F8F7F3] border border-[#E4E6E2] text-sm text-[#172019] placeholder-[#697069] focus:outline-none focus:border-[#2E6B48] focus:bg-white transition-colors"
+          />
+          <svg class="w-5 h-5 text-[#697069] absolute left-3.5 top-3.5" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="11" cy="11" r="8"/>
+            <line x1="21" x2="16.65" y1="21" y2="16.65"/>
+          </svg>
+          <button id="clear-search" type="button" class="hidden absolute right-3.5 top-3.5 text-xs text-[#697069] hover:text-[#172019]">Temizle</button>
+        </div>
+
+        <!-- Category Horizontal Scroll / Tabs -->
+        <div class="flex items-center gap-2 overflow-x-auto pb-2 scrollbar-none border-b border-[#F1F0EC] sm:border-0" id="category-tabs">
+          <button
+            type="button"
+            data-category-btn="all"
+            class="category-tab active-tab px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all"
+          >
+            Tüm Menü ({menuItems.length})
+          </button>
+          {categories.map((cat) => {
+            const count = menuItems.filter(i => i.category === cat.slug).length;
+            return (
+              <button
+                type="button"
+                data-category-btn={cat.slug}
+                class="category-tab px-4 py-2.5 rounded-xl text-xs sm:text-sm font-bold whitespace-nowrap transition-all text-[#697069] hover:text-[#172019] hover:bg-[#F8F7F3]"
+              >
+                {cat.name} ({count})
+              </button>
+            );
+          })}
+        </div>
+
+        <!-- Active Filter Status Indicator -->
+        <div id="filter-indicator" class="hidden mt-4 pt-3 border-t border-[#F1F0EC] flex items-center justify-between text-xs text-[#697069]">
+          <span id="filter-status-text"></span>
+          <button id="reset-all-filters" type="button" class="font-bold text-[#2E6B48] hover:underline">Filtreleri Temizle</button>
+        </div>
+      </div>
+
+      <!-- Menu Items Grid -->
+      <div id="menu-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8">
+        {menuItems.map((item) => (
+          <div
+            class="menu-item-wrapper"
+            data-category={item.category}
+            data-goals={item.goalTags.join(',')}
+            data-name={item.name.toLowerCase()}
+            data-desc={item.description.toLowerCase()}
+            data-tags={item.tags.join(',').toLowerCase()}
+            data-protein={item.protein}
+            data-calories={item.calories}
+          >
+            <MenuCard item={item} />
+          </div>
+        ))}
+      </div>
+
+      <!-- Empty State -->
+      <div id="empty-state" class="hidden text-center py-20 bg-white rounded-3xl border border-[#E4E6E2] p-8 max-w-lg mx-auto">
+        <div class="w-16 h-16 rounded-full bg-[#F8F7F3] text-3xl flex items-center justify-center mx-auto mb-4">
+          🥗
+        </div>
+        <h3 class="text-xl font-bold text-[#172019] mb-2">Aradığınız kriterde ürün bulunamadı</h3>
+        <p class="text-sm text-[#697069] mb-6">
+          Farklı bir arama terimi deneyebilir veya filtreleri sıfırlayabilirsiniz.
+        </p>
+        <button
+          type="button"
+          id="empty-reset-btn"
+          class="px-6 py-3 rounded-full bg-[#2E6B48] text-white text-sm font-bold hover:bg-[#1E4B32] transition-colors"
+        >
+          Tüm Menüyü Göster
+        </button>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- Help & Custom Order Strip -->
+  <section class="py-12 bg-white border-t border-[#E4E6E2]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="p-8 rounded-3xl bg-[#E7F0E9] border border-[#D2EED8] flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-4 text-center md:text-left">
+          <div class="w-12 h-12 rounded-2xl bg-[#2E6B48] text-white flex items-center justify-center text-2xl flex-shrink-0">
+            💬
+          </div>
+          <div>
+            <h3 class="text-lg font-bold text-[#1E4B32]">Özel Beslenme veya Alerjen Talebin mi Var?</h3>
+            <p class="text-xs sm:text-sm text-[#2E6B48] mt-0.5">
+              İçerik değişimi veya kişiye özel makro hedefleriniz için WhatsApp üzerinden bize danışabilirsiniz.
+            </p>
+          </div>
+        </div>
+        <WhatsAppButton
+          message="Merhaba, New Me menüsünde kişiye özel beslenme / porsiyon alternatifleri hakkında bilgi almak istiyorum."
+          variant="primary"
+          size="md"
+          label="WhatsApp'tan Danış"
+          class="flex-shrink-0 w-full md:w-auto"
+        />
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .category-tab.active-tab {
+    background-color: #2E6B48;
+    color: #FFFFFF;
+  }
+  .goal-pill.active-goal {
+    background-color: #2E6B48;
+    color: #FFFFFF;
+    border-color: #2E6B48;
+  }
+</style>
+
+<script>
+  function initMenuFilters() {
+    const searchInput = document.getElementById('menu-search-input') as HTMLInputElement | null;
+    const clearSearch = document.getElementById('clear-search');
+    const categoryTabs = document.querySelectorAll('.category-tab');
+    const goalPills = document.querySelectorAll('.goal-pill');
+    const items = document.querySelectorAll('.menu-item-wrapper');
+    const emptyState = document.getElementById('empty-state');
+    const filterIndicator = document.getElementById('filter-indicator');
+    const filterStatusText = document.getElementById('filter-status-text');
+    const resetAllBtn = document.getElementById('reset-all-filters');
+    const emptyResetBtn = document.getElementById('empty-reset-btn');
+
+    let currentCategory = 'all';
+    let currentGoal = '';
+    let currentSearch = '';
+
+    // Check URL parameters on load (e.g. ?category=bowl or ?goal=protein-performans)
+    const urlParams = new URLSearchParams(window.location.search);
+    const paramCategory = urlParams.get('category');
+    const paramGoal = urlParams.get('goal');
+
+    if (paramCategory) {
+      currentCategory = paramCategory;
+    }
+    if (paramGoal) {
+      currentGoal = paramGoal;
+    }
+
+    function updateUI() {
+      // Update Category Tabs active state
+      categoryTabs.forEach(tab => {
+        const cat = tab.getAttribute('data-category-btn');
+        if (cat === currentCategory) {
+          tab.classList.add('active-tab');
+          tab.classList.remove('text-[#697069]', 'hover:bg-[#F8F7F3]');
+        } else {
+          tab.classList.remove('active-tab');
+          tab.classList.add('text-[#697069]', 'hover:bg-[#F8F7F3]');
+        }
+      });
+
+      // Update Goal Pills active state
+      goalPills.forEach(pill => {
+        const goal = pill.getAttribute('data-goal-btn');
+        if (goal === currentGoal) {
+          pill.classList.add('active-goal');
+        } else {
+          pill.classList.remove('active-goal');
+        }
+      });
+
+      // Filter item wrappers
+      let visibleCount = 0;
+      items.forEach(wrapper => {
+        const el = wrapper as HTMLElement;
+        const itemCat = el.getAttribute('data-category') || '';
+        const itemGoals = (el.getAttribute('data-goals') || '').split(',');
+        const itemName = el.getAttribute('data-name') || '';
+        const itemDesc = el.getAttribute('data-desc') || '';
+        const itemTags = el.getAttribute('data-tags') || '';
+
+        const matchCategory = currentCategory === 'all' || itemCat === currentCategory;
+        const matchGoal = !currentGoal || itemGoals.includes(currentGoal);
+        const matchSearch = !currentSearch ||
+          itemName.includes(currentSearch) ||
+          itemDesc.includes(currentSearch) ||
+          itemTags.includes(currentSearch);
+
+        if (matchCategory && matchGoal && matchSearch) {
+          el.style.display = 'block';
+          visibleCount++;
+        } else {
+          el.style.display = 'none';
+        }
+      });
+
+      // Show/hide empty state
+      if (emptyState) {
+        emptyState.style.display = visibleCount === 0 ? 'block' : 'none';
+      }
+
+      // Update filter indicator
+      if (filterIndicator && filterStatusText) {
+        const activeFilters = [];
+        if (currentCategory !== 'all') activeFilters.push(`Kategori: ${currentCategory}`);
+        if (currentGoal) activeFilters.push(`Hedef: ${currentGoal}`);
+        if (currentSearch) activeFilters.push(`Arama: "${currentSearch}"`);
+
+        if (activeFilters.length > 0) {
+          filterIndicator.classList.remove('hidden');
+          filterStatusText.textContent = `${activeFilters.join(' • ')} (${visibleCount} sonuç listeleniyor)`;
+        } else {
+          filterIndicator.classList.add('hidden');
+        }
+      }
+
+      // Sync URL without refresh
+      const newUrl = new URL(window.location.href);
+      if (currentCategory !== 'all') newUrl.searchParams.set('category', currentCategory);
+      else newUrl.searchParams.delete('category');
+
+      if (currentGoal) newUrl.searchParams.set('goal', currentGoal);
+      else newUrl.searchParams.delete('goal');
+
+      window.history.replaceState({}, '', newUrl.toString());
+    }
+
+    // Category click handler
+    categoryTabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        const cat = tab.getAttribute('data-category-btn') || 'all';
+        currentCategory = cat;
+        updateUI();
+      });
+    });
+
+    // Goal click handler
+    goalPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        const goal = pill.getAttribute('data-goal-btn') || '';
+        if (currentGoal === goal) {
+          currentGoal = ''; // toggle off
+        } else {
+          currentGoal = goal;
+        }
+        updateUI();
+      });
+    });
+
+    // Search input handler
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        const val = (e.target as HTMLInputElement).value.trim().toLowerCase();
+        currentSearch = val;
+        if (clearSearch) {
+          clearSearch.classList.toggle('hidden', val.length === 0);
+        }
+        updateUI();
+      });
+    }
+
+    if (clearSearch && searchInput) {
+      clearSearch.addEventListener('click', () => {
+        searchInput.value = '';
+        currentSearch = '';
+        clearSearch.classList.add('hidden');
+        updateUI();
+      });
+    }
+
+    function resetFilters() {
+      currentCategory = 'all';
+      currentGoal = '';
+      currentSearch = '';
+      if (searchInput) searchInput.value = '';
+      if (clearSearch) clearSearch.classList.add('hidden');
+      updateUI();
+    }
+
+    resetAllBtn?.addEventListener('click', resetFilters);
+    emptyResetBtn?.addEventListener('click', resetFilters);
+
+    // Initial render
+    updateUI();
+  }
+
+  // Run on page load
+  document.addEventListener('DOMContentLoaded', initMenuFilters);
+</script>

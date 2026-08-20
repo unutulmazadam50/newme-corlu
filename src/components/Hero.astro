@@ -1,0 +1,122 @@
+---
+import WhatsAppButton from './WhatsAppButton.astro';
+---
+
+<section class="relative overflow-hidden pt-6 pb-16 md:py-20 lg:py-24 bg-[#F8F7F3]">
+  <!-- Subtle decorative ambient circles -->
+  <div class="absolute top-10 right-10 w-96 h-96 bg-[#E7F0E9] rounded-full blur-3xl opacity-60 pointer-events-none -z-10"></div>
+  <div class="absolute bottom-10 left-10 w-80 h-80 bg-[#FEF7EA] rounded-full blur-3xl opacity-50 pointer-events-none -z-10"></div>
+
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-8 items-center">
+      
+      <!-- Left Column: Copy & CTAs (50% desktop) -->
+      <div class="lg:col-span-7 flex flex-col gap-6 text-center lg:text-left">
+        
+        <!-- Eyebrow Pill -->
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-[#E7F0E9] text-[#1E4B32] text-xs sm:text-sm font-bold tracking-wider uppercase mx-auto lg:mx-0 w-fit">
+          <span class="w-2 h-2 rounded-full bg-[#2E6B48] animate-pulse"></span>
+          <span>HEALTHY FOOD • WELLNESS • ÇORLU</span>
+        </div>
+
+        <!-- Main Heading -->
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-black text-[#172019] tracking-tight leading-[1.1] text-balance">
+          Ne Yediğini Bil. <br />
+          <span class="text-[#2E6B48]">Kendini İyi Hisset.</span>
+        </h1>
+
+        <!-- Subtext -->
+        <p class="text-base sm:text-lg text-[#697069] leading-relaxed max-w-2xl mx-auto lg:mx-0">
+          Kalorisi ve makroları belli, yüksek proteinli ve dengeli seçeneklerle günlük rutinine uygun öğünleri keşfet. Çorlu'da sağlıklı beslenmenin en lezzetli adresi.
+        </p>
+
+        <!-- CTA Buttons Row -->
+        <div class="flex flex-col sm:flex-row items-center gap-3.5 pt-2 justify-center lg:justify-start">
+          <a
+            href="/menu"
+            class="w-full sm:w-auto inline-flex items-center justify-center gap-2 px-7 py-3.5 rounded-full bg-[#2E6B48] text-white text-base font-bold shadow-md hover:bg-[#1E4B32] hover:shadow-lg transition-all duration-200 min-h-[52px]"
+          >
+            <span>Menüyü Keşfet</span>
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M5 12h14M12 5l7 7-7 7" />
+            </svg>
+          </a>
+
+          <WhatsAppButton
+            message="Merhaba, New Me menü hakkında bilgi almak ve sipariş vermek istiyorum."
+            variant="outline"
+            size="lg"
+            label="WhatsApp'tan Sipariş Ver"
+            fullWidth={false}
+            class="w-full sm:w-auto"
+          />
+        </div>
+
+        <!-- Quick stats micro-strip -->
+        <div class="pt-6 border-t border-[#E4E6E2] flex items-center justify-center lg:justify-start gap-8 sm:gap-10 text-left">
+          <div>
+            <span class="block text-2xl font-black text-[#172019]">%100</span>
+            <span class="text-xs text-[#697069] font-medium">Şeffaf Makrolar</span>
+          </div>
+          <div class="w-px h-8 bg-[#E4E6E2]"></div>
+          <div>
+            <span class="block text-2xl font-black text-[#2E6B48]">Taze</span>
+            <span class="text-xs text-[#697069] font-medium">Günlük Hazırlık</span>
+          </div>
+          <div class="w-px h-8 bg-[#E4E6E2]"></div>
+          <div>
+            <span class="block text-2xl font-black text-[#D5A44C]">Hızlı</span>
+            <span class="text-xs text-[#697069] font-medium">WhatsApp İletişim</span>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Right Column: Visual & Floating Macro Cards (50% desktop) -->
+      <div class="lg:col-span-5 relative">
+        <div class="relative mx-auto max-w-md lg:max-w-none">
+          
+          <!-- Main Food Visual -->
+          <div class="relative rounded-3xl overflow-hidden aspect-[4/4] sm:aspect-[4/4] shadow-2xl border-4 border-white">
+            <img
+              src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1000&q=85"
+              alt="New Me Çorlu Somon Kinoa Bowl"
+              fetchpriority="high"
+              class="w-full h-full object-cover"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent"></div>
+            
+            <div class="absolute bottom-4 left-4 right-4 text-white">
+              <span class="text-xs font-semibold uppercase tracking-wider text-emerald-300">Günün Önerisi</span>
+              <p class="text-lg font-bold">Izgara Somon & Kinoa Bowl</p>
+            </div>
+          </div>
+
+          <!-- Floating Badge 1: High Protein -->
+          <div class="absolute -top-4 -left-4 sm:-left-6 bg-white/95 backdrop-blur-md rounded-2xl p-3.5 shadow-lg border border-[#E4E6E2] flex items-center gap-3 animate-bounce" style="animation-duration: 4s;">
+            <div class="w-10 h-10 rounded-xl bg-emerald-100 text-emerald-800 flex items-center justify-center font-bold text-lg">
+              💪
+            </div>
+            <div>
+              <span class="text-[10px] text-[#697069] font-semibold uppercase block">Protein Gücü</span>
+              <span class="text-base font-extrabold text-[#1E4B32]">36g Protein</span>
+            </div>
+          </div>
+
+          <!-- Floating Badge 2: Calorie & Balanced -->
+          <div class="absolute -bottom-4 -right-4 sm:-right-6 bg-white/95 backdrop-blur-md rounded-2xl p-3.5 shadow-lg border border-[#E4E6E2] flex items-center gap-3">
+            <div class="w-10 h-10 rounded-xl bg-amber-100 text-amber-900 flex items-center justify-center font-bold text-lg">
+              🔥
+            </div>
+            <div>
+              <span class="text-[10px] text-[#697069] font-semibold uppercase block">Dengeli Enerji</span>
+              <span class="text-base font-extrabold text-[#A36B0B]">460 kcal</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

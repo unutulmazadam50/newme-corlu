@@ -1,0 +1,135 @@
+---
+import Layout from '../layouts/Layout.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+import { business } from '../data/business';
+---
+
+<Layout
+  title="Hakkımızda | New Me Wellness Cafe Çorlu"
+  description="New Me Çorlu'nun sağlıklı beslenme vizyonu, şeffaf makro felsefesi ve taze cafe deneyimi hakkında bilgi edinin."
+  activePath="/hakkimizda"
+>
+  <!-- Header Banner -->
+  <section class="bg-white border-b border-[#E4E6E2] py-14 md:py-20">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center max-w-3xl mx-auto">
+      <span class="inline-flex items-center gap-1.5 px-3.5 py-1 rounded-full bg-[#E7F0E9] text-[#1E4B32] text-xs font-bold uppercase tracking-wider mb-3">
+        Biz Kimiz?
+      </span>
+      <h1 class="text-3xl sm:text-4xl md:text-5xl font-black text-[#172019] tracking-tight">
+        Sadece Bir Öğün Değil, <br />
+        <span class="text-[#2E6B48]">Daha İyi Bir Rutin.</span>
+      </h1>
+      <p class="text-base sm:text-lg text-[#697069] mt-4 leading-relaxed">
+        New Me, sağlıklı beslenmenin lezzetten vazgeçmek veya katı kısıtlamalar anlamına gelmediğine inanan, Çorlu merkezli modern bir wellness cafe konseptidir.
+      </p>
+    </div>
+  </section>
+
+  <!-- Narrative Section with Visuals -->
+  <section class="py-16 md:py-24 bg-[#F8F7F3]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <!-- Split Row 1: The Vision -->
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center mb-20">
+        <div class="lg:col-span-6 flex flex-col gap-5">
+          <span class="text-xs font-bold text-[#2E6B48] uppercase tracking-wider">Vizyonumuz</span>
+          <h2 class="text-2xl sm:text-3xl font-black text-[#172019]">
+            Ne Yediğini Bilmenin Verdiği Güven
+          </h2>
+          <p class="text-sm sm:text-base text-[#697069] leading-relaxed">
+            Günlük hayatın yoğun temposunda sağlıklı ve dengeli beslenmek genellikle zor ve karmaşık gelebilir. Çoğu zaman dışarıdan yemek söylerken porsiyonun ne kadar kalori, protein veya yağ içerdiğini tahmin etmek zorunda kalırsınız.
+          </p>
+          <p class="text-sm sm:text-base text-[#697069] leading-relaxed">
+            New Me olarak bu belirsizliği ortadan kaldırıyoruz. Menümüzdeki her bir tabağın, bowlu ve içeceğin besin değerlerini net bir şekilde paylaşıyor; hedeflerinize uygun seçimler yapmanızı kolaylaştırıyoruz.
+          </p>
+        </div>
+
+        <div class="lg:col-span-6">
+          <div class="rounded-3xl overflow-hidden shadow-xl aspect-[4/3] bg-[#E4E6E2] border-4 border-white">
+            <img
+              src="https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1000&q=80"
+              alt="New Me Sağlıklı Mutfak"
+              class="w-full h-full object-cover"
+            />
+          </div>
+        </div>
+      </div>
+
+      <!-- Core Values Grid -->
+      <div class="bg-white rounded-3xl p-8 sm:p-12 border border-[#E4E6E2] shadow-sm mb-20">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <h3 class="text-2xl sm:text-3xl font-black text-[#172019]">
+            New Me'yi Farklı Kılan Temel Değerler
+          </h3>
+          <p class="text-sm text-[#697069] mt-2">
+            Mutfak standartlarımızdan servis kalitemize kadar her detayda aynı özen.
+          </p>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          
+          <div class="flex flex-col gap-3 p-6 rounded-2xl bg-[#F8F7F3] border border-[#E4E6E2]">
+            <div class="w-12 h-12 rounded-xl bg-[#E7F0E9] text-[#1E4B32] flex items-center justify-center text-2xl font-bold">
+              🌱
+            </div>
+            <h4 class="text-lg font-bold text-[#172019]">Katkısız & Taze Malzeme</h4>
+            <p class="text-xs sm:text-sm text-[#697069] leading-relaxed">
+              Mevsiminde tedarik edilen taze yeşillikler, kaliteli et ve deniz ürünleri, katkısız ev yapımı soslar.
+            </p>
+          </div>
+
+          <div class="flex flex-col gap-3 p-6 rounded-2xl bg-[#F8F7F3] border border-[#E4E6E2]">
+            <div class="w-12 h-12 rounded-xl bg-[#FEF7EA] text-[#A36B0B] flex items-center justify-center text-2xl font-bold">
+              ⚖️
+            </div>
+            <h4 class="text-lg font-bold text-[#172019]">Dengeli & Hedefe Uygun</h4>
+            <p class="text-xs sm:text-sm text-[#697069] leading-relaxed">
+              Aşırı diyet baskısı olmadan, kilo kontrolü veya kas kazanımı hedeflerine yönelik optimize edilmiş porsiyonlar.
+            </p>
+          </div>
+
+          <div class="flex flex-col gap-3 p-6 rounded-2xl bg-[#F8F7F3] border border-[#E4E6E2]">
+            <div class="w-12 h-12 rounded-xl bg-[#EEF4FD] text-[#1E50A0] flex items-center justify-center text-2xl font-bold">
+              💬
+            </div>
+            <h4 class="text-lg font-bold text-[#172019]">Samimi & Hızlı İletişim</h4>
+            <p class="text-xs sm:text-sm text-[#697069] leading-relaxed">
+              Siparişleriniz doğrudan WhatsApp üzerinden hızla alınır, özel istek ve tercihleriniz anında değerlendirilir.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Çorlu Local Connection & CTA -->
+      <div class="p-8 sm:p-12 rounded-3xl bg-[#172019] text-white flex flex-col md:flex-row items-center justify-between gap-8">
+        <div class="flex flex-col gap-2 max-w-xl">
+          <span class="text-xs font-bold text-[#D5A44C] uppercase tracking-wider">Çorlu'da Sağlıklı Yaşam Durağı</span>
+          <h3 class="text-2xl sm:text-3xl font-black">
+            Kendine İyi Bakmaya Bugün Başla.
+          </h3>
+          <p class="text-xs sm:text-sm text-gray-300 leading-relaxed">
+            Menümüzü inceleyin, hedefinize en uygun öğünü seçin ve WhatsApp üzerinden bize yazın.
+          </p>
+        </div>
+
+        <div class="flex flex-col sm:flex-row items-center gap-3 w-full md:w-auto">
+          <a
+            href="/menu"
+            class="w-full sm:w-auto inline-flex items-center justify-center px-7 py-3.5 rounded-full bg-[#2E6B48] text-white text-sm font-bold hover:bg-[#1E4B32] transition-colors"
+          >
+            Menüyü İncele
+          </a>
+          <WhatsAppButton
+            message="Merhaba, New Me hakkında bilgi almak ve sipariş vermek istiyorum."
+            variant="white"
+            size="md"
+            label="WhatsApp'tan Yaz"
+            class="w-full sm:w-auto"
+          />
+        </div>
+      </div>
+
+    </div>
+  </section>
+</Layout>

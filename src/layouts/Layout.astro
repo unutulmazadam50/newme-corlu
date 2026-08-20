@@ -1,0 +1,114 @@
+---
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import FloatingWhatsApp from '../components/FloatingWhatsApp.astro';
+import MobileStickyBar from '../components/MobileStickyBar.astro';
+import { business } from '../data/business';
+import '../styles/global.css';
+
+interface Props {
+  title?: string;
+  description?: string;
+  image?: string;
+  canonicalUrl?: string;
+  activePath?: string;
+}
+
+const {
+  title = 'New Me Çorlu | Sağlıklı & Protein Odaklı Lezzetler',
+  description = "New Me Çorlu'da fit menüler, bowl çeşitleri, protein odaklı öğünler, sağlıklı kahvaltılar ve ferah içecek seçeneklerini keşfet. Kalorisi ve makroları belli lezzetler.",
+  image = 'https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=1200&q=80',
+  canonicalUrl = Astro.url.href,
+  activePath = Astro.url.pathname,
+} = Astro.props;
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Restaurant",
+  "name": "New Me Wellness Cafe",
+  "alternateName": "New Me Çorlu",
+  "image": image,
+  "servesCuisine": "Healthy, High Protein, Bowls, Wellness Food",
+  "telephone": business.phone,
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "Kazımiye Mah. Salih Omurtak Cad. No:142",
+    "addressLocality": "Çorlu",
+    "addressRegion": "Tekirdağ",
+    "addressCountry": "TR"
+  },
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": 41.1592,
+    "longitude": 27.8000
+  },
+  "url": "https://newmecorlu.com",
+  "priceRange": "₺₺",
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+      "opens": "08:30",
+      "closes": "21:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Sunday"],
+      "opens": "10:00",
+      "closes": "19:00"
+    }
+  ]
+};
+---
+
+<!doctype html>
+<html lang="tr" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonicalUrl} />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonicalUrl} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={image} />
+    <meta property="og:locale" content="tr_TR" />
+    <meta property="og:site_name" content="New Me Çorlu" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={canonicalUrl} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+    <meta property="twitter:image" content={image} />
+
+    <!-- Preconnect Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <!-- Structured Data JSON-LD -->
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  </head>
+  <body class="min-h-screen flex flex-col bg-[#F8F7F3] text-[#172019]">
+    <Header activePath={activePath} />
+
+    <main class="flex-grow">
+      <slot />
+    </main>
+
+    <Footer />
+
+    <!-- Action widgets -->
+    <FloatingWhatsApp />
+    <MobileStickyBar />
+  </body>
+</html>

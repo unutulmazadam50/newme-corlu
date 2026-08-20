@@ -1,0 +1,159 @@
+---
+import WhatsAppButton from './WhatsAppButton.astro';
+import { business } from '../data/business';
+
+interface Props {
+  activePath?: string;
+}
+
+const { activePath = '/' } = Astro.props;
+
+const navLinks = [
+  { href: '/', label: 'Anasayfa' },
+  { href: '/menu', label: 'Menü' },
+  { href: '/#hedefler', label: 'Hedefine Göre' },
+  { href: '/hakkimizda', label: 'Hakkımızda' },
+  { href: '/iletisim', label: 'İletişim' },
+];
+---
+
+<header id="main-header" class="sticky top-0 z-40 w-full transition-all duration-300 glass-header border-b border-[#E4E6E2]/80">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+    <!-- Brand Logo -->
+    <a href="/" class="flex items-center gap-3 group" aria-label="New Me Wellness Cafe Anasayfa">
+      <div class="w-10 h-10 rounded-2xl bg-[#2E6B48] text-white flex items-center justify-center font-black text-xl tracking-tighter shadow-sm group-hover:bg-[#1E4B32] transition-colors">
+        NM
+      </div>
+      <div class="flex flex-col">
+        <span class="text-xl font-extrabold text-[#172019] tracking-tight leading-none">
+          New Me
+        </span>
+        <span class="text-[11px] font-semibold text-[#2E6B48] tracking-wider uppercase mt-0.5">
+          Wellness Cafe • Çorlu
+        </span>
+      </div>
+    </a>
+
+    <!-- Desktop Navigation -->
+    <nav class="hidden md:flex items-center gap-8" aria-label="Ana Menü">
+      {navLinks.map((link) => {
+        const isActive = activePath === link.href || (link.href !== '/' && activePath.startsWith(link.href) && !link.href.includes('#'));
+        return (
+          <a
+            href={link.href}
+            class={`text-sm font-semibold transition-colors duration-150 relative py-1 ${
+              isActive
+                ? 'text-[#2E6B48] font-bold'
+                : 'text-[#172019] hover:text-[#2E6B48]'
+            }`}
+          >
+            {link.label}
+            {isActive && (
+              <span class="absolute bottom-0 left-0 right-0 h-0.5 bg-[#2E6B48] rounded-full" />
+            )}
+          </a>
+        );
+      })}
+    </nav>
+
+    <!-- Desktop Action CTA & Mobile Controls -->
+    <div class="flex items-center gap-3">
+      <div class="hidden sm:block">
+        <WhatsAppButton
+          variant="primary"
+          size="md"
+          label="WhatsApp Sipariş"
+        />
+      </div>
+
+      <!-- Mobile Fast WhatsApp Action -->
+      <a
+        href={`https://wa.me/${business.whatsapp}?text=${encodeURIComponent('Merhaba, New Me menü ve sipariş hakkında bilgi almak istiyorum.')}`}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="sm:hidden p-2.5 rounded-full bg-[#E7F0E9] text-[#1E4B32] hover:bg-[#2E6B48] hover:text-white transition-colors"
+        aria-label="WhatsApp'tan Yaz"
+      >
+        <svg class="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
+          <path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.598 2.669-.699c.969.528 1.838.78 2.791.78h.001c3.182 0 5.769-2.587 5.769-5.768.001-3.18-2.585-5.764-5.77-5.764zm3.376 8.169c-.14.394-.712.728-1.02.775-.28.043-.643.08-1.849-.419-1.542-.638-2.536-2.196-2.613-2.298-.076-.102-.622-.828-.622-1.579 0-.751.394-1.121.534-1.274.14-.153.305-.192.407-.192.102 0 .204.002.293.006.094.004.22-.036.344.263.127.305.432 1.053.47 1.13.038.076.064.165.013.267-.051.102-.076.165-.153.254-.076.089-.161.199-.23.267-.076.076-.156.159-.067.311.089.153.395.652.848 1.056.583.52 1.074.681 1.227.757.153.076.242.064.331-.038.089-.102.382-.444.483-.597.102-.153.204-.127.343-.076.14.051.89.419 1.043.496.153.076.254.115.292.178.038.064.038.369-.102.763zM12 2C6.477 2 2 6.477 2 12c0 1.891.527 3.659 1.442 5.168l-1.442 5.264 5.424-1.423A9.957 9.957 0 0 0 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z" />
+        </svg>
+      </a>
+
+      <!-- Mobile Hamburger Button -->
+      <button
+        id="mobile-menu-btn"
+        type="button"
+        class="md:hidden p-2.5 rounded-xl text-[#172019] hover:bg-[#E4E6E2]/50 transition-colors"
+        aria-label="Menüyü Aç"
+        aria-expanded="false"
+      >
+        <svg id="menu-icon-open" class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M4 6h16M4 12h16M4 18h16" />
+        </svg>
+        <svg id="menu-icon-close" class="w-6 h-6 hidden" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <!-- Mobile Dropdown Menu -->
+  <div id="mobile-menu" class="hidden md:hidden bg-white border-b border-[#E4E6E2] shadow-xl px-6 py-6 transition-all duration-200">
+    <nav class="flex flex-col gap-4">
+      {navLinks.map((link) => (
+        <a
+          href={link.href}
+          class="text-base font-bold text-[#172019] hover:text-[#2E6B48] py-2 border-b border-[#F1F0EC] transition-colors"
+        >
+          {link.label}
+        </a>
+      ))}
+      <div class="pt-3">
+        <WhatsAppButton
+          variant="primary"
+          size="lg"
+          fullWidth
+          label="WhatsApp'tan Sipariş Ver"
+        />
+      </div>
+    </nav>
+  </div>
+</header>
+
+<script>
+  const menuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  const openIcon = document.getElementById('menu-icon-open');
+  const closeIcon = document.getElementById('menu-icon-close');
+
+  if (menuBtn && mobileMenu && openIcon && closeIcon) {
+    menuBtn.addEventListener('click', () => {
+      const isExpanded = menuBtn.getAttribute('aria-expanded') === 'true';
+      menuBtn.setAttribute('aria-expanded', (!isExpanded).toString());
+      mobileMenu.classList.toggle('hidden');
+      openIcon.classList.toggle('hidden');
+      closeIcon.classList.toggle('hidden');
+    });
+
+    // Close mobile menu when clicking a navigation link
+    const mobileLinks = mobileMenu.querySelectorAll('a');
+    mobileLinks.forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+        openIcon.classList.remove('hidden');
+        closeIcon.classList.add('hidden');
+        menuBtn.setAttribute('aria-expanded', 'false');
+      });
+    });
+  }
+
+  // Scroll effect on header
+  const header = document.getElementById('main-header');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 20) {
+      header?.classList.add('shadow-sm', 'bg-white/95');
+    } else {
+      header?.classList.remove('shadow-sm', 'bg-white/95');
+    }
+  });
+</script>

@@ -1,0 +1,102 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --background: #F8F7F3;
+  --surface: #FFFFFF;
+
+  --text: #172019;
+  --muted: #697069;
+
+  --primary: #2E6B48;
+  --primary-dark: #1E4B32;
+  --primary-soft: #E7F0E9;
+
+  --accent: #D5A44C;
+
+  --border: #E4E6E2;
+
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 30px;
+}
+
+@layer base {
+  html {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    background-color: var(--background);
+    color: var(--text);
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+    color: var(--text);
+    letter-spacing: -0.02em;
+  }
+
+  ::selection {
+    background-color: var(--primary-soft);
+    color: var(--primary-dark);
+  }
+}
+
+/* Custom modern scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: #F1F0EC;
+}
+::-webkit-scrollbar-thumb {
+  background: #D2D6CE;
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #A9B0A4;
+}
+
+/* Macro badges helper classes */
+.badge-protein {
+  background-color: #EBF7EE;
+  color: #1E6B38;
+  border: 1px solid #D2EED8;
+}
+.badge-calories {
+  background-color: #FEF7EA;
+  color: #A36B0B;
+  border: 1px solid #FBE8C4;
+}
+.badge-carbs {
+  background-color: #EEF4FD;
+  color: #1E50A0;
+  border: 1px solid #D4E3FB;
+}
+.badge-fat {
+  background-color: #FFF3EB;
+  color: #B55219;
+  border: 1px solid #FEDCC9;
+}
+.badge-fiber {
+  background-color: #F3F0FA;
+  color: #643FA8;
+  border: 1px solid #E3DCF5;
+}
+
+/* Glassmorphism utility */
+.glass-header {
+  background: rgba(248, 247, 243, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+}
+
+.glass-card {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+}

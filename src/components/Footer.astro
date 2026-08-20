@@ -1,0 +1,96 @@
+---
+import { business } from '../data/business';
+import WhatsAppButton from './WhatsAppButton.astro';
+---
+
+<footer class="bg-[#172019] text-white pt-16 pb-24 md:pb-16 border-t border-white/10">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-10 md:gap-8 pb-12 border-b border-white/10">
+      
+      <!-- Brand column -->
+      <div class="md:col-span-1 flex flex-col gap-4">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-2xl bg-[#2E6B48] text-white flex items-center justify-center font-black text-xl">
+            NM
+          </div>
+          <div class="flex flex-col">
+            <span class="text-xl font-extrabold tracking-tight">New Me</span>
+            <span class="text-xs text-[#D5A44C] font-semibold tracking-wider uppercase">Wellness Cafe • Çorlu</span>
+          </div>
+        </div>
+        <p class="text-xs text-gray-300 leading-relaxed">
+          Sağlıklı beslenmeyi lezzetli, kolay ve günlük hayatın parçası haline getiren modern wellness cafe deneyimi.
+        </p>
+        <div class="pt-2">
+          <a
+            href={business.instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-2 text-xs font-semibold text-[#D5A44C] hover:underline"
+          >
+            <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect width="20" height="20" x="2" y="2" rx="5" ry="5"/>
+              <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+              <line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/>
+            </svg>
+            <span>{business.instagram}</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Quick Nav -->
+      <div>
+        <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Hızlı Menü</h4>
+        <ul class="flex flex-col gap-2.5 text-xs text-gray-300">
+          <li><a href="/" class="hover:text-white transition-colors">Anasayfa</a></li>
+          <li><a href="/menu" class="hover:text-white transition-colors">Tüm Dijital Menü</a></li>
+          <li><a href="/#hedefler" class="hover:text-white transition-colors">Hedefine Göre Beslen</a></li>
+          <li><a href="/hakkimizda" class="hover:text-white transition-colors">Hakkımızda & Vizyon</a></li>
+          <li><a href="/iletisim" class="hover:text-white transition-colors">İletişim & Lokasyon</a></li>
+        </ul>
+      </div>
+
+      <!-- Working Hours -->
+      <div>
+        <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-4">Çalışma Saatleri</h4>
+        <ul class="flex flex-col gap-2 text-xs text-gray-300">
+          {business.workingHours.map(item => (
+            <li class="flex flex-col">
+              <span class="font-semibold text-gray-100">{item.days}</span>
+              <span class="text-gray-400">{item.hours}</span>
+            </li>
+          ))}
+          <li class="pt-2 text-[11px] text-[#D5A44C] font-medium">
+            * Siparişler anında taze hazırlanır.
+          </li>
+        </ul>
+      </div>
+
+      <!-- WhatsApp Action -->
+      <div class="flex flex-col gap-4">
+        <h4 class="text-sm font-bold text-white uppercase tracking-wider mb-1">Doğrudan İletişim</h4>
+        <p class="text-xs text-gray-300 leading-relaxed">
+          Menüdeki tüm lezzetler ve sorularınız için WhatsApp üzerinden bize hemen ulaşabilirsiniz.
+        </p>
+        <WhatsAppButton
+          variant="primary"
+          size="md"
+          fullWidth
+          label="WhatsApp'tan Yazın"
+        />
+        <p class="text-[11px] text-gray-400">
+          📍 {business.address}
+        </p>
+      </div>
+
+    </div>
+
+    <!-- Bottom Copyright -->
+    <div class="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-gray-400 text-center sm:text-left">
+      <p>© {new Date().getFullYear()} New Me Çorlu. Tüm hakları saklıdır.</p>
+      <p class="text-[11px] text-gray-500">
+        Bu platform bir tanıtım ve dijital menü rehberidir. Siparişler doğrudan WhatsApp üzerinden alınmaktadır.
+      </p>
+    </div>
+  </div>
+</footer>

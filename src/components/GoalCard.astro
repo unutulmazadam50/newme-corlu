@@ -1,0 +1,56 @@
+---
+import type { Goal } from '../data/goals';
+
+interface Props {
+  goal: Goal;
+}
+
+const { goal } = Astro.props;
+---
+
+<a
+  href={`/menu?goal=${goal.filterKey}`}
+  class={`group relative overflow-hidden rounded-3xl p-6 md:p-8 bg-white border border-[#E4E6E2] shadow-card hover:shadow-card-hover transition-all duration-300 flex flex-col justify-between min-h-[300px] ${goal.accentBorder}`}
+>
+  <!-- Background Image with Soft Gradient Overlay -->
+  <div class="absolute inset-0 z-0">
+    <img
+      src={goal.image}
+      alt={goal.title}
+      loading="lazy"
+      class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-20"
+    />
+    <div class="absolute inset-0 bg-gradient-to-t from-white via-white/90 to-white/75"></div>
+  </div>
+
+  <!-- Content -->
+  <div class="relative z-10">
+    <div class="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-bold border mb-4 shadow-sm bg-white/80 backdrop-blur-sm">
+      <span>🎯 {goal.badge}</span>
+    </div>
+    
+    <h3 class="text-2xl font-extrabold text-[#172019] mb-2 group-hover:text-[#2E6B48] transition-colors">
+      {goal.title}
+    </h3>
+    
+    <p class="text-sm font-semibold text-[#2E6B48] mb-3">
+      {goal.subtitle}
+    </p>
+
+    <p class="text-sm text-[#697069] leading-relaxed">
+      {goal.description}
+    </p>
+  </div>
+
+  <!-- Action CTA -->
+  <div class="relative z-10 pt-6 mt-4 border-t border-[#E4E6E2]/70 flex items-center justify-between">
+    <span class="text-sm font-bold text-[#1E4B32] group-hover:underline">
+      Uygun Menüleri Keşfet
+    </span>
+    <span class="w-10 h-10 rounded-full bg-[#E7F0E9] group-hover:bg-[#2E6B48] group-hover:text-white text-[#1E4B32] flex items-center justify-center transition-colors">
+      <svg class="w-5 h-5 group-hover:translate-x-0.5 transition-transform" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M12 5l7 7-7 7" />
+      </svg>
+    </span>
+  </div>
+</a>

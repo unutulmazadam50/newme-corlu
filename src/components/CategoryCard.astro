@@ -1,0 +1,41 @@
+---
+import type { Category } from '../data/categories';
+
+interface Props {
+  category: Category;
+}
+
+const { category } = Astro.props;
+---
+
+<a
+  href={`/menu?category=${category.slug}`}
+  class="group relative overflow-hidden rounded-3xl aspect-[4/5] sm:aspect-[3/4] flex flex-col justify-end p-6 border border-[#E4E6E2] shadow-card hover:shadow-card-hover transition-all duration-300 bg-[#172019]"
+>
+  <!-- Background Image with Zoom on Hover -->
+  <img
+    src={category.image}
+    alt={category.name}
+    loading="lazy"
+    class="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out opacity-85"
+  />
+
+  <!-- Dark Gradient for High Contrast Readability -->
+  <div class="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent"></div>
+
+  <!-- Content Overlay -->
+  <div class="relative z-10 text-white flex flex-col gap-1.5">
+    <h3 class="text-xl md:text-2xl font-bold tracking-tight text-white group-hover:text-[#D5A44C] transition-colors">
+      {category.name}
+    </h3>
+    <p class="text-xs md:text-sm text-gray-200 line-clamp-2 leading-relaxed opacity-90">
+      {category.shortDescription}
+    </p>
+    <div class="pt-2 flex items-center gap-1.5 text-xs font-bold text-[#D5A44C] group-hover:translate-x-1 transition-transform">
+      <span>Kategoriyi İncele</span>
+      <svg class="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M5 12h14M12 5l7 7-7 7" />
+      </svg>
+    </div>
+  </div>
+</a>

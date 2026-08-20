@@ -1,0 +1,49 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import ValueStrip from '../components/ValueStrip.astro';
+import GoalSection from '../components/GoalSection.astro';
+import CategorySection from '../components/CategorySection.astro';
+import FeaturedMenu from '../components/FeaturedMenu.astro';
+import BowlEditorial from '../components/BowlEditorial.astro';
+import DrinksSection from '../components/DrinksSection.astro';
+import BrandStory from '../components/BrandStory.astro';
+import InstagramGrid from '../components/InstagramGrid.astro';
+import LocationSection from '../components/LocationSection.astro';
+---
+
+<Layout
+  title="New Me Çorlu | Sağlıklı & Protein Odaklı Lezzetler"
+  description="New Me Çorlu'da fit menüler, bowl çeşitleri, protein odaklı öğünler, sağlıklı kahvaltılar ve ferah içecek seçeneklerini keşfet. Kalorisi ve makroları belli lezzetler."
+  activePath="/"
+>
+  <!-- 1. Hero Section -->
+  <Hero />
+
+  <!-- 2. Value Strip (4 Pillars) -->
+  <ValueStrip />
+
+  <!-- 3. Goal Selection ("Hedefin Ne?") -->
+  <GoalSection />
+
+  <!-- 4. Featured Menu Items ("New Me Favorileri") -->
+  <FeaturedMenu />
+
+  <!-- 5. Signature Bowl Showcase -->
+  <BowlEditorial />
+
+  <!-- 6. Category Exploration Grid -->
+  <CategorySection />
+
+  <!-- 7. Detoks & Shake Bar -->
+  <DrinksSection />
+
+  <!-- 8. Genuine Brand Story -->
+  <BrandStory />
+
+  <!-- 9. Location & Contact Highlight -->
+  <LocationSection />
+
+  <!-- 10. Instagram Social Grid -->
+  <InstagramGrid />
+</Layout>

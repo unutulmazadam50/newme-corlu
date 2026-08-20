@@ -1,0 +1,225 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import { menuItems, type MenuItem } from '../../data/menu';
+import MacroBadge from '../../components/MacroBadge.astro';
+import WhatsAppButton from '../../components/WhatsAppButton.astro';
+import MenuCard from '../../components/MenuCard.astro';
+import { createProductWhatsAppUrl } from '../../data/business';
+
+export async function getStaticPaths() {
+  return menuItems.map((item) => ({
+    params: { slug: item.slug },
+    props: { item },
+  }));
+}
+
+interface Props {
+  item: MenuItem;
+}
+
+const { item } = Astro.props;
+
+const relatedItems = menuItems
+  .filter((i) => i.id !== item.id && (i.category === item.category || i.goalTags.some(g => item.goalTags.includes(g))))
+  .slice(0, 3);
+
+const orderUrl = createProductWhatsAppUrl(item.name);
+---
+
+<Layout
+  title={`${item.name} (${item.protein}g Protein, ${item.calories} kcal) | New Me Çorlu`}
+  description={`${item.name}: ${item.description} Kalori: ${item.calories} kcal, Protein: ${item.protein}g, Karb: ${item.carbs}g, Yağ: ${item.fat}g. WhatsApp'tan sipariş ver.`}
+  image={item.image}
+  activePath="/menu"
+>
+  <!-- Breadcrumb -->
+  <div class="bg-white border-b border-[#E4E6E2]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3.5 flex items-center gap-2 text-xs font-semibold text-[#697069]">
+      <a href="/" class="hover:text-[#2E6B48]">Anasayfa</a>
+      <span>/</span>
+      <a href="/menu" class="hover:text-[#2E6B48]">Menü</a>
+      <span>/</span>
+      <a href={`/menu?category=${item.category}`} class="hover:text-[#2E6B48]">{item.categoryName}</a>
+      <span>/</span>
+      <span class="text-[#172019] truncate">{item.name}</span>
+    </div>
+  </div>
+
+  <!-- Product Detail Core (2-column desktop layout) -->
+  <section class="py-10 md:py-16 bg-[#F8F7F3]">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      
+      <div class="bg-white rounded-3xl p-6 sm:p-8 lg:p-12 border border-[#E4E6E2] shadow-sm grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+        
+        <!-- Left Column: Large Image (5/12 or 6/12) -->
+        <div class="lg:col-span-6 flex flex-col gap-4">
+          <div class="relative rounded-3xl overflow-hidden aspect-[4/3] bg-[#F1F0EC] shadow-md border border-[#E4E6E2]">
+            <img
+              src={item.image}
+              alt={item.name}
+              class="w-full h-full object-cover"
+              fetchpriority="high"
+            />
+            {item.featured && (
+              <span class="absolute top-4 left-4 inline-flex items-center px-3 py-1.5 rounded-full text-xs font-extrabold bg-[#D5A44C] text-[#172019] shadow-sm">
+                ★ New Me Favorisi
+              </span>
+            )}
+          </div>
+
+          <!-- Tags strip -->
+          <div class="flex flex-wrap gap-2 pt-2">
+            {item.tags.map((tag) => (
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-[#E7F0E9] text-[#1E4B32] border border-[#D2EED8]">
+                ✓ {tag}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <!-- Right Column: Details & Macro Strip (6/12) -->
+        <div class="lg:col-span-6 flex flex-col gap-6">
+          
+          <!-- Category & Price -->
+          <div class="flex items-center justify-between gap-4">
+            <span class="px-3 py-1 rounded-full text-xs font-bold bg-[#F8F7F3] text-[#2E6B48] border border-[#E4E6E2]">
+              {item.categoryName}
+            </span>
+            {item.price && (
+              <span class="text-2xl sm:text-3xl font-black text-[#1E4B32]">
+                {item.price} ₺
+              </span>
+            )}
+          </div>
+
+          <!-- Title -->
+          <h1 class="text-2xl sm:text-3xl lg:text-4xl font-black text-[#172019] tracking-tight leading-tight">
+            {item.name}
+          </h1>
+
+          <!-- Description -->
+          <p class="text-sm sm:text-base text-[#697069] leading-relaxed">
+            {item.description}
+          </p>
+
+          <!-- Macro Values Section (Large Format) -->
+          <div class="pt-2">
+            <h3 class="text-xs font-bold text-[#697069] uppercase tracking-wider mb-3">
+              Porsiyon Başına Besin Değerleri (Makrolar)
+            </h3>
+            <MacroBadge
+              calories={item.calories}
+              protein={item.protein}
+              carbs={item.carbs}
+              fat={item.fat}
+              size="lg"
+            />
+          </div>
+
+          <!-- Primary WhatsApp Order CTA -->
+          <div class="pt-4 border-t border-[#F1F0EC] flex flex-col gap-2.5">
+            <WhatsAppButton
+              message={`Merhaba, New Me web sitesinden geliyorum. "${item.name}" hakkında bilgi almak / sipariş vermek istiyorum.`}
+              variant="primary"
+              size="lg"
+              fullWidth
+              label="WhatsApp'tan Sipariş Ver"
+            />
+            <p class="text-center text-[11px] text-[#697069]">
+              ⚡ Siparişler Çorlu şubemizde anında taze olarak hazırlanır.
+            </p>
+          </div>
+
+        </div>
+
+      </div>
+
+      <!-- Detail Tabs / Specifications (Ingredients, Allergens, Suitable For) -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-8">
+        
+        <!-- İçindekiler -->
+        <div class="bg-white rounded-3xl p-6 border border-[#E4E6E2]">
+          <div class="flex items-center gap-2 mb-4 text-[#2E6B48]">
+            <span class="text-xl">🥗</span>
+            <h3 class="text-base font-bold text-[#172019]">İçindekiler</h3>
+          </div>
+          <ul class="flex flex-col gap-2 text-xs sm:text-sm text-[#697069]">
+            {item.ingredients.map((ing) => (
+              <li class="flex items-start gap-2">
+                <span class="text-[#2E6B48] font-bold">•</span>
+                <span>{ing}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <!-- Alerjen Bilgisi -->
+        <div class="bg-white rounded-3xl p-6 border border-[#E4E6E2]">
+          <div class="flex items-center gap-2 mb-4 text-[#A36B0B]">
+            <span class="text-xl">⚠️</span>
+            <h3 class="text-base font-bold text-[#172019]">Alerjen Uyarısı</h3>
+          </div>
+          {item.allergens && item.allergens.length > 0 ? (
+            <div class="flex flex-wrap gap-1.5">
+              {item.allergens.map((all) => (
+                <span class="px-2.5 py-1 rounded-lg text-xs font-bold bg-[#FEF7EA] text-[#A36B0B] border border-[#FBE8C4]">
+                  {all}
+                </span>
+              ))}
+            </div>
+          ) : (
+            <p class="text-xs text-[#697069] leading-relaxed">
+              Bu üründe temel alerjen (gluten, süt, fındık vb.) uyarısı bulunmamaktadır.
+            </p>
+          )}
+          <p class="text-[11px] text-[#697069] mt-4 pt-3 border-t border-[#F1F0EC]">
+            Özel alerji durumunuz varsa sipariş verirken WhatsApp üzerinden lütfen belirtiniz.
+          </p>
+        </div>
+
+        <!-- Kimler İçin Uygun? -->
+        <div class="bg-white rounded-3xl p-6 border border-[#E4E6E2]">
+          <div class="flex items-center gap-2 mb-4 text-[#1E50A0]">
+            <span class="text-xl">🎯</span>
+            <h3 class="text-base font-bold text-[#172019]">Kimler İçin Uygun?</h3>
+          </div>
+          {item.suitableFor && item.suitableFor.length > 0 ? (
+            <ul class="flex flex-col gap-2 text-xs sm:text-sm text-[#697069]">
+              {item.suitableFor.map((s) => (
+                <li class="flex items-start gap-2">
+                  <span class="text-[#1E50A0] font-bold">✓</span>
+                  <span>{s}</span>
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p class="text-xs text-[#697069]">Dengeli ve sağlıklı beslenmeyi hedefleyen herkes için uygundur.</p>
+          )}
+        </div>
+
+      </div>
+
+      <!-- Related items -->
+      {relatedItems.length > 0 && (
+        <div class="mt-16 pt-12 border-t border-[#E4E6E2]">
+          <div class="flex items-center justify-between mb-8">
+            <div>
+              <span class="text-xs font-bold text-[#2E6B48] uppercase tracking-wider">Benzer Lezzetler</span>
+              <h2 class="text-2xl font-black text-[#172019] mt-0.5">Bunları da Deneyebilirsiniz</h2>
+            </div>
+            <a href="/menu" class="text-xs font-bold text-[#2E6B48] hover:underline">
+              Tüm Menü →
+            </a>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {relatedItems.map((rel) => (
+              <MenuCard item={rel} />
+            ))}
+          </div>
+        </div>
+      )}
+
+    </div>
+  </section>
+</Layout>

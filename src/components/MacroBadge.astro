@@ -1,0 +1,72 @@
+---
+interface Props {
+  calories: number;
+  protein: number;
+  carbs: number;
+  fat: number;
+  fiber?: number;
+  compact?: boolean;
+  size?: 'sm' | 'md' | 'lg';
+}
+
+const { calories, protein, carbs, fat, fiber, compact = false, size = 'sm' } = Astro.props;
+---
+
+{compact ? (
+  <div class="flex items-center gap-1.5 flex-wrap text-xs font-semibold">
+    <span class="inline-flex items-center px-2 py-0.5 rounded-full badge-calories" title="Kalori Değeri">
+      🔥 {calories} kcal
+    </span>
+    <span class="inline-flex items-center px-2 py-0.5 rounded-full badge-protein" title="Protein Miktarı">
+      💪 {protein}g Protein
+    </span>
+    <span class="inline-flex items-center px-2 py-0.5 rounded-full badge-carbs" title="Karbonhidrat">
+      🌾 {carbs}g Karb
+    </span>
+    <span class="inline-flex items-center px-2 py-0.5 rounded-full badge-fat" title="Yağ Miktarı">
+      🥑 {fat}g Yağ
+    </span>
+  </div>
+) : size === 'lg' ? (
+  <div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+    <div class="p-3.5 rounded-2xl badge-calories text-center flex flex-col items-center justify-center">
+      <span class="text-xs font-medium opacity-80 uppercase tracking-wider">Kalori</span>
+      <span class="text-2xl font-bold mt-0.5">{calories}</span>
+      <span class="text-[11px] font-medium opacity-70">kcal</span>
+    </div>
+    <div class="p-3.5 rounded-2xl badge-protein text-center flex flex-col items-center justify-center">
+      <span class="text-xs font-medium opacity-80 uppercase tracking-wider">Protein</span>
+      <span class="text-2xl font-bold mt-0.5">{protein}g</span>
+      <span class="text-[11px] font-medium opacity-70">yüksek protein</span>
+    </div>
+    <div class="p-3.5 rounded-2xl badge-carbs text-center flex flex-col items-center justify-center">
+      <span class="text-xs font-medium opacity-80 uppercase tracking-wider">Karb</span>
+      <span class="text-2xl font-bold mt-0.5">{carbs}g</span>
+      <span class="text-[11px] font-medium opacity-70">kompleks karb</span>
+    </div>
+    <div class="p-3.5 rounded-2xl badge-fat text-center flex flex-col items-center justify-center">
+      <span class="text-xs font-medium opacity-80 uppercase tracking-wider">Sağlıklı Yağ</span>
+      <span class="text-2xl font-bold mt-0.5">{fat}g</span>
+      <span class="text-[11px] font-medium opacity-70">kaliteli yağlar</span>
+    </div>
+  </div>
+) : (
+  <div class="grid grid-cols-4 gap-1.5 p-2 bg-[#F8F7F3] rounded-xl text-center">
+    <div class="flex flex-col">
+      <span class="text-[10px] text-[#697069] font-medium uppercase">Kalori</span>
+      <span class="text-xs font-bold text-[#A36B0B]">{calories} <span class="text-[9px] font-normal">kcal</span></span>
+    </div>
+    <div class="flex flex-col border-l border-[#E4E6E2]">
+      <span class="text-[10px] text-[#697069] font-medium uppercase">Protein</span>
+      <span class="text-xs font-bold text-[#1E6B38]">{protein}g</span>
+    </div>
+    <div class="flex flex-col border-l border-[#E4E6E2]">
+      <span class="text-[10px] text-[#697069] font-medium uppercase">Karb</span>
+      <span class="text-xs font-bold text-[#1E50A0]">{carbs}g</span>
+    </div>
+    <div class="flex flex-col border-l border-[#E4E6E2]">
+      <span class="text-[10px] text-[#697069] font-medium uppercase">Yağ</span>
+      <span class="text-xs font-bold text-[#B55219]">{fat}g</span>
+    </div>
+  </div>
+)}

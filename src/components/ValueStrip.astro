@@ -1,0 +1,46 @@
+---
+const values = [
+  {
+    title: 'Taze Hazırlanır',
+    description: 'Günlük ve birinci sınıf taze malzemelerle sipariş üzerine özenle hazırlanır.',
+    icon: '🌱',
+    color: 'bg-emerald-50 text-emerald-800 border-emerald-100',
+  },
+  {
+    title: 'Makroları Belli',
+    description: 'Kalori, protein, karbonhidrat ve yağ değerlerini bilerek ne yediğini kolayca takip et.',
+    icon: '📊',
+    color: 'bg-amber-50 text-amber-900 border-amber-100',
+  },
+  {
+    title: 'Hedefine Uygun',
+    description: 'Kilo kontrolü, sporcu performansı veya dengeli yaşam hedeflerine özel porsiyonlar.',
+    icon: '🎯',
+    color: 'bg-teal-50 text-teal-900 border-teal-100',
+  },
+  {
+    title: 'Kolay Sipariş',
+    description: 'Karmaşık ödeme adımları yok; doğrudan WhatsApp üzerinden tek tıkla sipariş ver.',
+    icon: '💬',
+    color: 'bg-green-50 text-green-900 border-green-100',
+  },
+];
+---
+
+<section class="py-12 bg-white border-y border-[#E4E6E2]">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+      {values.map((v) => (
+        <div class="p-6 rounded-2xl bg-[#F8F7F3] border border-[#E4E6E2] flex flex-col gap-3 hover:border-[#2E6B48]/30 transition-colors">
+          <div class={`w-12 h-12 rounded-xl flex items-center justify-center text-2xl border ${v.color}`}>
+            <span>{v.icon}</span>
+          </div>
+          <div>
+            <h3 class="text-base font-bold text-[#172019] mb-1">{v.title}</h3>
+            <p class="text-xs sm:text-sm text-[#697069] leading-relaxed">{v.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
