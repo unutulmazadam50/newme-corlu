@@ -1,0 +1,25 @@
+services:
+  newme:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: newme-corlu
+    restart: always
+    networks:
+      - coolify
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.newme-http.entryPoints=http"
+      - "traefik.http.routers.newme-http.rule=Host(`newme.panther01agency.com`)"
+      - "traefik.http.routers.newme-http.middlewares=redirect-to-https"
+      - "traefik.http.routers.newme-https.entryPoints=https"
+      - "traefik.http.routers.newme-https.rule=Host(`newme.panther01agency.com`)"
+      - "traefik.http.routers.newme-https.tls=true"
+      - "traefik.http.routers.newme-https.tls.certresolver=letsencrypt"
+      - "traefik.http.services.newme.loadbalancer.server.port=80"
+    ports:
+      - "3456:80"
+
+networks:
+  coolify:
+    external: true
